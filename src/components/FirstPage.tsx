@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
+import InputAdornment from "@mui/material/InputAdornment";
+import { AccountCircle } from "@mui/icons-material";
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -26,15 +30,15 @@ const LoginForm = () => {
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Check if all fields are filled
+    
     if (name.trim() === "" || phoneNumber.trim() === "" || email.trim() === "") {
       setShowError(true);
     } else {
-      // Save the user details in localStorage
+     
       localStorage.setItem("name", name);
       localStorage.setItem("phoneNumber", phoneNumber);
       localStorage.setItem("email", email);
-      // Navigate the user to the second page
+      
       navigate("/second-page");
     }
   };
@@ -45,7 +49,14 @@ const LoginForm = () => {
       <TextField
         label="Name"
         variant="outlined"
+        placeholder="name"
         value={name}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AccountCircle />
+            </InputAdornment>
+          ),}}
         onChange={handleNameChange}
         fullWidth
         margin="normal"
@@ -54,6 +65,14 @@ const LoginForm = () => {
         label="Phone Number"
         variant="outlined"
         value={phoneNumber}
+        type="number"
+        placeholder="+91 "
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              < ContactPhoneIcon/>
+            </InputAdornment>
+          ),}}
         onChange={handlePhoneNumberChange}
         fullWidth
         margin="normal"
@@ -62,6 +81,13 @@ const LoginForm = () => {
         label="Email"
         variant="outlined"
         value={email}
+        placeholder="name@xyz.com" 
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AlternateEmailIcon />
+            </InputAdornment>
+          ),}}
         onChange={handleEmailChange}
         fullWidth
         margin="normal"
